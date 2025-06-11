@@ -1,3 +1,3 @@
-# Learn Mockito - Introduction to Unit Testing and Mockito
+# Learn Mockito - Advanced Mockito Techniques
 
-This is the codebase for Module "Introduction to Unit Testing and Mockito" of Learn Mockito.
+This is the codebase for Module "Advanced Mockito Techniques" of Learn Mockito.
