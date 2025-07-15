@@ -13,6 +13,12 @@
 
     <modules>
         <module>the-project-we-are-testing</module>
+        <module>mock-with-annotations-start</module>
+        <module>mock-with-annotations-end</module>
+        <module>creating-and-managing-mocks-start</module>
+        <module>creating-and-managing-mocks-end</module>
+        <module>stubbing-methods-for-controlled-behavior-start</module>
+        <module>stubbing-methods-for-controlled-behavior-end</module>
         <module>verifying-mock-interactions-start</module>
         <module>verifying-mock-interactions-end</module>
     </modules>
