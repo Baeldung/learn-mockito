@@ -18,5 +18,7 @@
         <module>advanced-stubbing-techniques-end</module>
         <module>exception-handling-start</module>
         <module>exception-handling-end</module>
+        <module>advanced-cases-start</module>
+        <module>advanced-cases-end</module>
     </modules>
 </project>
