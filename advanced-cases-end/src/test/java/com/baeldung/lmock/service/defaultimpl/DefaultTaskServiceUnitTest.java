@@ -14,15 +14,15 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedConstruction;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.baeldung.lmock.domain.model.Campaign;
 import com.baeldung.lmock.domain.model.Task;
@@ -31,6 +31,7 @@ import com.baeldung.lmock.persistence.repository.TaskRepository;
 import com.baeldung.lmock.persistence.repository.inmemory.InMemoryTaskRepository;
 import com.baeldung.lmock.service.TaskValidator;
 
+@ExtendWith(MockitoExtension.class)
 class DefaultTaskServiceUnitTest {
 
     @Mock
@@ -39,20 +40,15 @@ class DefaultTaskServiceUnitTest {
     @InjectMocks
     DefaultTaskService taskService;
 
-    @BeforeEach
-    void setupDataSource() {
-        MockitoAnnotations.openMocks(this);
-
+    @Test
+    void givenExistingTask_whenFindById_thenTaskRetrieved() {
         //given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(1L);
 
         when(taskRepository.findById(1L)).thenReturn(Optional.of(existingTask));
-    }
 
-    @Test
-    void givenExistingTask_whenFindById_thenTaskRetrieved() {
         // when
         Optional<Task> retrievedTask = taskService.findById(1L);
 
@@ -95,7 +91,7 @@ class DefaultTaskServiceUnitTest {
     }
 
     @Test
-    public void givenNewTask_whenCreateCalled_thenTaskIsSavedWithExpectedValues() {
+    void givenNewTask_whenCreateCalled_thenTaskIsSavedWithExpectedValues() {
         // given
         Task inputTask = new Task();
         inputTask.setId(null);
@@ -116,7 +112,7 @@ class DefaultTaskServiceUnitTest {
     }
 
     @Test
-    public void givenNewTask_whenCreateCalled_thenTaskIsSavedWithArgumentCaptor() {
+    void givenNewTask_whenCreateCalled_thenTaskIsSavedWithArgumentCaptor() {
         // given
         Task inputTask = new Task();
         inputTask.setId(null);

@@ -12,7 +12,6 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +26,7 @@ import com.baeldung.lmock.persistence.repository.TaskRepository;
 import com.baeldung.lmock.service.TaskService;
 
 @ExtendWith(MockitoExtension.class)
-public class DefaultTaskServiceUnitTest {
+class DefaultTaskServiceUnitTest {
 
     @Mock
     TaskRepository taskRepository;
@@ -36,7 +35,7 @@ public class DefaultTaskServiceUnitTest {
     DefaultTaskService taskService;
 
     @Test
-    public void givenExistingTask_whenFindById_thenTaskRetrieved() {
+    void givenExistingTask_whenFindById_thenTaskRetrieved() {
         //given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
@@ -50,23 +49,23 @@ public class DefaultTaskServiceUnitTest {
         // then
         Mockito.verify(taskRepository)
             .findById(1L);
-        Assertions.assertEquals("Task 1", retrievedTask.get()
+        assertEquals("Task 1", retrievedTask.get()
             .getName());
     }
 
     @Test
-    public void givenNonExistingTaskId_whenFindById_thenEmptyOptionalRetrieved() {
+    void givenNonExistingTaskId_whenFindById_thenEmptyOptionalRetrieved() {
         // when
         Optional<Task> retrievedTask = taskService.findById(99L);
 
         // then
-        Assertions.assertTrue(retrievedTask.isEmpty());
+        assertTrue(retrievedTask.isEmpty());
         Mockito.verify(taskRepository)
             .findById(99L);
     }
 
     @Test
-    public void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
+    void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
         //given
         Task existingTask = new Task("Task 2", "Task 2 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
             TaskStatus.TO_DO, null);
@@ -81,7 +80,7 @@ public class DefaultTaskServiceUnitTest {
         // then
         Mockito.verify(taskRepository)
             .findById(2L);
-        Assertions.assertEquals(TaskStatus.IN_PROGRESS, retrievedTask.get()
+        assertEquals(TaskStatus.IN_PROGRESS, retrievedTask.get()
             .getStatus());
     }
 
