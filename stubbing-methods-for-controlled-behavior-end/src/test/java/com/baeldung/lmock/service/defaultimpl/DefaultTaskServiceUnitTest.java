@@ -1,38 +1,30 @@
 package com.baeldung.lmock.service.defaultimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.baeldung.lmock.domain.model.Campaign;
 import com.baeldung.lmock.domain.model.Task;
 import com.baeldung.lmock.domain.model.TaskStatus;
 import com.baeldung.lmock.persistence.repository.TaskRepository;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-public class DefaultTaskServiceUnitTest {
+@ExtendWith(MockitoExtension.class)
+class DefaultTaskServiceUnitTest {
 
     @Mock
     TaskRepository taskRepository;
     @InjectMocks
     DefaultTaskService taskService;
-
-    @BeforeEach
-    public void setupDataSource() {
-        MockitoAnnotations.openMocks(this);
-
-        //given
-        Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
-            TaskStatus.TO_DO, null);
-        existingTask.setId(1L);
-    }
 
     @Test
     void givenStubbedFindById_whenCalledMultipleTimes_thenSameResults() {
@@ -42,9 +34,9 @@ public class DefaultTaskServiceUnitTest {
         Optional<Task> result3 = taskService.findById(2L);
 
         // then
-        Assertions.assertTrue(result1.isEmpty());
-        Assertions.assertTrue(result2.isEmpty());
-        Assertions.assertTrue(result3.isEmpty());
+        assertTrue(result1.isEmpty());
+        assertTrue(result2.isEmpty());
+        assertTrue(result3.isEmpty());
     }
 
     @Test
@@ -65,12 +57,12 @@ public class DefaultTaskServiceUnitTest {
         Optional<Task> result3 = taskService.findById(1L);
 
         // then
-        Assertions.assertTrue(result1.isPresent());
-        Assertions.assertEquals(100L, result1.get()
+        assertTrue(result1.isPresent());
+        assertEquals(100L, result1.get()
             .getId());
-        Assertions.assertTrue(result2.isPresent());
-        Assertions.assertEquals(200L, result2.get()
+        assertTrue(result2.isPresent());
+        assertEquals(200L, result2.get()
             .getId());
-        Assertions.assertTrue(result3.isEmpty());
+        assertTrue(result3.isEmpty());
     }
 }

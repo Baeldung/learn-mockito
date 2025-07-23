@@ -1,19 +1,21 @@
 package com.baeldung.lmock.service.defaultimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.baeldung.lmock.domain.model.Campaign;
 import com.baeldung.lmock.persistence.repository.CampaignRepository;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 class DefaultCampaignServiceUnitTest {
 
     @Mock
@@ -21,18 +23,13 @@ class DefaultCampaignServiceUnitTest {
     @InjectMocks
     private DefaultCampaignService service;
 
-    @BeforeEach
-    public void setupDataSource() {
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
     void givenStubbedFindById_whenNoStubbingSet_thenReturnsEmptyCampaign() {
         // when
         Optional<Campaign> result = service.findById(1L);
 
         // then
-        Assertions.assertTrue(result.isEmpty());
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -45,8 +42,8 @@ class DefaultCampaignServiceUnitTest {
         Optional<Campaign> result = service.findById(1L);
 
         // then
-        Assertions.assertTrue(result.isPresent());
-        Assertions.assertEquals("C1", result.get()
+        assertTrue(result.isPresent());
+        assertEquals("C1", result.get()
           .getCode());
     }
 }

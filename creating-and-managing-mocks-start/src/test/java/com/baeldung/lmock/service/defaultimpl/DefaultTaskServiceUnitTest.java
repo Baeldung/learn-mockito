@@ -1,11 +1,12 @@
 package com.baeldung.lmock.service.defaultimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +16,13 @@ import com.baeldung.lmock.domain.model.TaskStatus;
 import com.baeldung.lmock.persistence.repository.TaskRepository;
 import com.baeldung.lmock.persistence.repository.inmemory.InMemoryTaskRepository;
 
-public class DefaultTaskServiceUnitTest {
+class DefaultTaskServiceUnitTest {
 
     TaskRepository taskRepository;
     DefaultTaskService taskService;
 
     @BeforeEach
-    public void setupDataSource() {
+    void setupDataSource() {
         //given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
@@ -32,12 +33,12 @@ public class DefaultTaskServiceUnitTest {
     }
 
     @Test
-    public void givenExistingTask_whenFindById_thenTaskRetrieved() {
+    void givenExistingTask_whenFindById_thenTaskRetrieved() {
         // when
         Optional<Task> retrievedTask = taskService.findById(1L);
 
         // then
-        Assertions.assertEquals("Task 1", retrievedTask.get()
+        assertEquals("Task 1", retrievedTask.get()
             .getName());
     }
 }

@@ -1,5 +1,7 @@
 package com.baeldung.lmock.service.defaultimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
@@ -12,7 +14,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
@@ -27,7 +28,7 @@ import com.baeldung.lmock.domain.model.TaskStatus;
 import com.baeldung.lmock.persistence.repository.TaskRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class DefaultTaskServiceUnitTest {
+class DefaultTaskServiceUnitTest {
 
     @Mock
     TaskRepository taskRepository;
@@ -36,7 +37,7 @@ public class DefaultTaskServiceUnitTest {
     DefaultTaskService taskService;
 
     @Test
-    public void givenExistingTask_whenFindById_thenTaskRetrieved() {
+    void givenExistingTask_whenFindById_thenTaskRetrieved() {
         //given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
@@ -48,18 +49,18 @@ public class DefaultTaskServiceUnitTest {
         Optional<Task> retrievedTask = taskService.findById(1L);
 
         // then
-        Assertions.assertEquals("Task 1", retrievedTask.get()
+        assertEquals("Task 1", retrievedTask.get()
             .getName());
         verify(taskRepository).findById(1L);
     }
 
     @Test
-    public void givenNonExistingTaskId_whenFindById_thenEmptyOptionalRetrieved() {
+    void givenNonExistingTaskId_whenFindById_thenEmptyOptionalRetrieved() {
         // when
         Optional<Task> retrievedTask = taskService.findById(99L);
 
         // then
-        Assertions.assertTrue(retrievedTask.isEmpty());
+        assertTrue(retrievedTask.isEmpty());
     //        verify(taskRepository).findById(any());
     //        verify(taskRepository).findById(anyLong());
         verify(taskRepository)
@@ -67,18 +68,18 @@ public class DefaultTaskServiceUnitTest {
     }
 
     @Test 
-    public void whenSearchTasks_thenRepositoryIsInvoked() { 
+    void whenSearchTasks_thenRepositoryIsInvoked() { 
         // when 
         List<Task> tasks = taskService.searchTasks("name", 100L); 
         
         // then 
-        Assertions.assertTrue(tasks.isEmpty()); 
+        assertTrue(tasks.isEmpty());
         verify(taskRepository)
           .findByNameContainingAndAssigneeId(eq("name"), argThat(id -> id > 50L)); 
     }
 
     @Test
-    public void whenCreateAndUpdate_thenRepositoryIsInvokedTwice() {
+    void whenCreateAndUpdate_thenRepositoryIsInvokedTwice() {
         //given
         Task task = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
           TaskStatus.TO_DO, null);
@@ -96,7 +97,7 @@ public class DefaultTaskServiceUnitTest {
     }
 
     @Test
-    public void whenUpdatingNonExistingTask_thenRepositoryIsNotInvoked() {
+    void whenUpdatingNonExistingTask_thenRepositoryIsNotInvoked() {
         //given
         Task task = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
             TaskStatus.TO_DO, null);
@@ -109,7 +110,7 @@ public class DefaultTaskServiceUnitTest {
     }
 
     @Test
-    public void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
+    void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
         //given
         InOrder inOrder = Mockito.inOrder(taskRepository);
         Task existingTask = new Task("Task 2", "Task 2 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
@@ -125,7 +126,7 @@ public class DefaultTaskServiceUnitTest {
         Optional<Task> retrievedTask = taskService.updateStatus(2L, TaskStatus.IN_PROGRESS);
 
         // then
-        Assertions.assertEquals(TaskStatus.IN_PROGRESS, retrievedTask.get()
+        assertEquals(TaskStatus.IN_PROGRESS, retrievedTask.get()
             .getStatus());
         inOrder.verify(taskRepository).findById(2L);
         inOrder.verify(taskRepository).save(existingTask);

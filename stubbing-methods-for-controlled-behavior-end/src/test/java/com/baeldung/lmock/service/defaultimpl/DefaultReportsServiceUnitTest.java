@@ -1,34 +1,31 @@
 package com.baeldung.lmock.service.defaultimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 
 import com.baeldung.lmock.domain.model.Task;
 import com.baeldung.lmock.service.TaskService;
 import com.baeldung.lmock.service.reports.ReportBuilder;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 class DefaultReportsServiceUnitTest {
 
     @Mock
     private TaskService taskService;
     @InjectMocks
     private DefaultReportsService defaultReportsService;
-
-    @BeforeEach
-    public void setupDataSource() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     void givenDefaultReportsService_whenGenerateManagerReportWithoutStubbingVoid_thenReturnReports() {
@@ -39,7 +36,7 @@ class DefaultReportsServiceUnitTest {
         String generatedManagerReport = defaultReportsService.generateManagerReport(reportBuilder);
 
         // then
-        Assertions.assertNull(generatedManagerReport);
+        assertNull(generatedManagerReport);
     }
 
     @Test
@@ -60,6 +57,6 @@ class DefaultReportsServiceUnitTest {
         String generatedManagerReport = defaultReportsService.generateManagerReport(reportBuilder);
 
         // then
-        Assertions.assertEquals("report results", generatedManagerReport);
+        assertEquals("report results", generatedManagerReport);
     }
 }
