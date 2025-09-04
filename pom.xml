@@ -12,5 +12,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>bdd-with-mockito-start</module>
+        <module>bdd-with-mockito-end</module>
+        <module>common-mockito-pitfalls-start</module>
+        <module>common-mockito-pitfalls-end</module>
     </modules>
 </project>
