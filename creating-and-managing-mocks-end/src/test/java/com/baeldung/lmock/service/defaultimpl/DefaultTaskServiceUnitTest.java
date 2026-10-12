@@ -31,14 +31,14 @@ class DefaultTaskServiceUnitTest {
     void givenExistingTask_whenFindById_thenTaskRetrieved() {
         //given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
-          TaskStatus.TO_DO, null);
+            TaskStatus.TO_DO, null);
         Mockito.when(taskRepository.findById(1L))
-          .thenReturn(Optional.of(existingTask));
+            .thenReturn(Optional.of(existingTask));
         // when
         Optional<Task> retrievedTask = taskService.findById(1L);
 
         // then
         assertEquals("Task 1", retrievedTask.get()
-          .getName());
+            .getName());
     }
 }

@@ -38,7 +38,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenFindById_thenTaskRetrieved() {
-        //given
+        // given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(1L);
@@ -61,28 +61,28 @@ class DefaultTaskServiceUnitTest {
 
         // then
         assertTrue(retrievedTask.isEmpty());
-    //        verify(taskRepository).findById(any());
-    //        verify(taskRepository).findById(anyLong());
+        // verify(taskRepository).findById(any());
+        // verify(taskRepository).findById(anyLong());
         verify(taskRepository)
-          .findById(argThat(id -> id > 50L && id < 100L));
+            .findById(argThat(id -> id > 50L && id < 100L));
     }
 
-    @Test 
-    void whenSearchTasks_thenRepositoryIsInvoked() { 
-        // when 
-        List<Task> tasks = taskService.searchTasks("name", 100L); 
-        
-        // then 
+    @Test
+    void whenSearchTasks_thenRepositoryIsInvoked() {
+        // when
+        List<Task> tasks = taskService.searchTasks("name", 100L);
+
+        // then
         assertTrue(tasks.isEmpty());
         verify(taskRepository)
-          .findByNameContainingAndAssigneeId(eq("name"), argThat(id -> id > 50L)); 
+            .findByNameContainingAndAssigneeId(eq("name"), argThat(id -> id > 50L));
     }
 
     @Test
     void whenCreateAndUpdate_thenRepositoryIsInvokedTwice() {
-        //given
+        // given
         Task task = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
-          TaskStatus.TO_DO, null);
+            TaskStatus.TO_DO, null);
 
         when(taskRepository.findById(1L)).thenReturn(Optional.of(task));
 
@@ -98,7 +98,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void whenUpdatingNonExistingTask_thenRepositoryIsNotInvoked() {
-        //given
+        // given
         Task task = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
             TaskStatus.TO_DO, null);
 
@@ -111,7 +111,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
-        //given
+        // given
         InOrder inOrder = Mockito.inOrder(taskRepository);
         Task existingTask = new Task("Task 2", "Task 2 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
             TaskStatus.TO_DO, null);
@@ -119,9 +119,9 @@ class DefaultTaskServiceUnitTest {
 
         // when
         when(taskRepository.findById(2L))
-          .thenReturn(Optional.of(existingTask));
+            .thenReturn(Optional.of(existingTask));
         when(taskRepository.save(existingTask))
-          .thenReturn(existingTask);
+            .thenReturn(existingTask);
 
         Optional<Task> retrievedTask = taskService.updateStatus(2L, TaskStatus.IN_PROGRESS);
 

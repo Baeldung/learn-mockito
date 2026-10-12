@@ -46,11 +46,11 @@ class DefaultReportsServiceUnitTest {
         when(taskService.searchTasks(null, null)).thenReturn(relevantTasks);
         ReportBuilder<String> reportBuilder = Mockito.mock(ReportBuilder.class);
         doNothing().when(reportBuilder)
-          .addTasksData(relevantTasks);
+            .addTasksData(relevantTasks);
         doNothing().when(reportBuilder)
-          .addCampaignsData(relevantTasks);
+            .addCampaignsData(relevantTasks);
         doNothing().when(reportBuilder)
-          .addWorkersData(relevantTasks);
+            .addWorkersData(relevantTasks);
         when(reportBuilder.obtainReport()).thenReturn("report results");
 
         // when

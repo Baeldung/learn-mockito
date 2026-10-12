@@ -35,17 +35,17 @@ class DefaultReportsServiceTest {
 
         // Mockito won't inject the created workerService into the reportsService, so
         // we get a NullPointerException here
-        assertThrows(NullPointerException.class,() -> reportsService.generateWorkerReport(builder,1L));
+        assertThrows(NullPointerException.class, () -> reportsService.generateWorkerReport(builder, 1L));
     }
 
     @Test
     void givenWorkerIdAndReportBuilder_whenGenerateWorkerReport_thenReportNotFound() {
 
         var builder = new SimpleMapReportBuilder();
-        var rs = new DefaultReportsService(taskService,workerService);
+        var rs = new DefaultReportsService(taskService, workerService);
 
         // Here, we also get an exception because the generated mock workService returns an empty Optional
-        assertThrows(NoSuchElementException.class,() -> rs.generateWorkerReport(builder,1L));
+        assertThrows(NoSuchElementException.class, () -> rs.generateWorkerReport(builder, 1L));
 
     }
 

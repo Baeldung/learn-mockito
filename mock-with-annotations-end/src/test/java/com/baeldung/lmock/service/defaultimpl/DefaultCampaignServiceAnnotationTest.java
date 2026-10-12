@@ -14,9 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockitoExtension.class)
 class DefaultCampaignServiceAnnotationTest {
 
-    @Mock CampaignRepository campaignRepo;
+    @Mock
+    CampaignRepository campaignRepo;
 
-    @InjectMocks DefaultCampaignService campaignService;
+    @InjectMocks
+    DefaultCampaignService campaignService;
 
     @Test
     void givenAnnotatedMocks_whenInitialized_thenTheyAreNotNull() {

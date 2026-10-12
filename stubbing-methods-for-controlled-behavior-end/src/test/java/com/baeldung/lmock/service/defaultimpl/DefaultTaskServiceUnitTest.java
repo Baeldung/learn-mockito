@@ -90,15 +90,15 @@ class DefaultTaskServiceUnitTest {
         Long assigneeId = 1L;
         List<Task> actualTasks = taskService.searchTasks(searchName, assigneeId);
 
-        // 3. Assert: Use JUnit 5 assertions to check the state of the returned list.
+        // 3. Assert: Use JUnit assertions to check the state of the returned list.
         assertNotNull(actualTasks, "The result should not be null.");
         assertTrue(actualTasks.isEmpty(), "The returned list should be empty.");
     }
-    
+
     @Test
     @DisplayName("should search with any name and an exact assignee ID")
     void givenAnySearchAndExactAssigneeId_whenSearchTasks_thenRepositoryIsCalled() {
-       
+
         when(taskRepository.findByNameContainingAndAssigneeId(any(), eq(1L)))
             .thenReturn(Collections.emptyList());
 
@@ -106,8 +106,8 @@ class DefaultTaskServiceUnitTest {
         String searchName = "test";
         Long assigneeId = 1L;
         List<Task> result = taskService.searchTasks(searchName, assigneeId);
-        
-        //Assert the final output of the service method
+
+        // Assert the final output of the service method
         assertNotNull(result, "The result should not be null.");
         assertTrue(result.isEmpty());
     }

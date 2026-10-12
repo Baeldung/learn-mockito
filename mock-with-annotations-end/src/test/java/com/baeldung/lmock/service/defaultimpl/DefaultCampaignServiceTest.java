@@ -17,9 +17,11 @@ class DefaultCampaignServiceTest {
 
     private AutoCloseable closeable;
 
-    @Mock(extraInterfaces = Closeable.class) CampaignRepository campaignRepository;
+    @Mock(extraInterfaces = Closeable.class)
+    CampaignRepository campaignRepository;
 
-    @InjectMocks DefaultCampaignService defaultCampaignService;
+    @InjectMocks
+    DefaultCampaignService defaultCampaignService;
 
     @Test
     void givenCampaignRepository_whenInitialized_thenMockImplementsCloseable() {
@@ -37,7 +39,8 @@ class DefaultCampaignServiceTest {
         closeable = MockitoAnnotations.openMocks(this);
     }
 
-    @AfterEach void closeMocks() throws Exception{
+    @AfterEach
+    void closeMocks() throws Exception {
         closeable.close();
     }
 }

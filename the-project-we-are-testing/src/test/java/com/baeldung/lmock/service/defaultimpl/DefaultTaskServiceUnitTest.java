@@ -24,7 +24,7 @@ class DefaultTaskServiceUnitTest {
 
     @BeforeEach
     void setupDataSource() {
-        //given
+        // given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(1L);
@@ -54,7 +54,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
-        //given
+        // given
         Task existingTask = new Task("Task 2", "Task 2 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
             TaskStatus.TO_DO, null);
         Task outputTask = taskService.create(existingTask);

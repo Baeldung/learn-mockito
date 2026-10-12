@@ -26,7 +26,7 @@ class DefaultTaskServiceUnitTest {
     void setupDataSource() {
         //given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
-          TaskStatus.TO_DO, null);
+            TaskStatus.TO_DO, null);
         existingTask.setId(1L);
         taskRepository = new InMemoryTaskRepository(new HashSet<>(List.of(existingTask)));
 
@@ -40,7 +40,7 @@ class DefaultTaskServiceUnitTest {
 
         // then
         assertEquals("Task 1", retrievedTask.get()
-          .getName());
+            .getName());
     }
 
     @Test
@@ -56,7 +56,7 @@ class DefaultTaskServiceUnitTest {
     void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
         //given
         Task existingTask = new Task("Task 2", "Task 2 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
-          TaskStatus.TO_DO, null);
+            TaskStatus.TO_DO, null);
         Task outputTask = taskService.create(existingTask);
         assertEquals(TaskStatus.TO_DO, outputTask.getStatus());
 
@@ -65,7 +65,7 @@ class DefaultTaskServiceUnitTest {
 
         // then
         assertEquals(TaskStatus.IN_PROGRESS, retrievedTask.get()
-          .getStatus());
+            .getStatus());
     }
 
 }

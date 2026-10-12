@@ -48,7 +48,7 @@ class DefaultCampaignServiceUnitTest {
         // then
         assertTrue(result.isPresent());
         assertEquals("C1", result.get()
-          .getCode());
+            .getCode());
     }
 
     @Test
@@ -56,7 +56,7 @@ class DefaultCampaignServiceUnitTest {
     void givenNewCampaign_whenCreate_thenCampaignIsSaved() {
         // 1. Arrange: Create a campaign without an ID.
         Campaign newCampaign = new Campaign("NEW-CAMPAIGN", "New Campaign", "A fresh campaign.");
-        
+
         // Create the expected campaign that the repository will return (with an ID).
         Campaign savedCampaign = new Campaign("NEW-CAMPAIGN", "New Campaign", "A fresh campaign.");
         savedCampaign.setId(1L);
