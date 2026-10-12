@@ -36,7 +36,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenFindById_thenTaskRetrieved() {
-        //given
+        // given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(1L);
@@ -66,7 +66,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
-        //given
+        // given
         Task existingTask = new Task("Task 2", "Task 2 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(2L);
@@ -162,19 +162,17 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenDeepStubbing_whenGetAssigneeFullName_thenUsedDeepStubName() {
-        //given
+        // given
         TaskRepository taskRepository = mock(TaskRepository.class, Mockito.RETURNS_DEEP_STUBS);
         TaskService taskService = new DefaultTaskService(taskRepository);
 
         when(taskRepository.getById(1L)
             .getAssignee()
-            .getFirstName()
-        ).thenReturn("John");
+            .getFirstName()).thenReturn("John");
 
         when(taskRepository.getById(1L)
             .getAssignee()
-            .getLastName()
-        ).thenReturn("Doe");
+            .getLastName()).thenReturn("Doe");
 
         // when
         String fullName = taskService.getAssigneeFullName(1L);

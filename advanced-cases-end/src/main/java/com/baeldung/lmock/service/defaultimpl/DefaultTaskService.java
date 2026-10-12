@@ -92,8 +92,8 @@ public class DefaultTaskService implements TaskService {
     @Override
     public final boolean canReassignTask(Task task) {
         return task != null &&
-          (task.getStatus() == TaskStatus.TO_DO ||
-          task.getStatus() == TaskStatus.IN_PROGRESS);
+            (task.getStatus() == TaskStatus.TO_DO ||
+                task.getStatus() == TaskStatus.IN_PROGRESS);
     }
 
     public TaskRepository getTaskRepository() {

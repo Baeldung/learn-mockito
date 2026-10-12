@@ -25,14 +25,14 @@ class DefaultCampaignServiceExceptionUnitTest {
 
     @Mock
     CampaignRepository campaignRepository;
-    
+
     @Test
-    void givenExceptionThrown_whenClosingCampaign_thenItIsPropagated() {
+    void givenRepositoryFailure_whenFindingById_thenEmptyOptionalReturned() {
         CampaignService campaignService = new DefaultCampaignService(campaignRepository);
         when(campaignRepository.findById(1L)).thenThrow(new IllegalStateException("DB failure"));
-        
+
         Optional<Campaign> result = campaignService.findById(1L);
-        
+
         assertTrue(result.isEmpty());
     }
 
@@ -54,7 +54,7 @@ class DefaultCampaignServiceExceptionUnitTest {
         });
         Mockito.verify(campaignRepository).findById(1L);
         assertEquals("Illegal Argument", ex.getMessage());
-        
+
         Mockito.verify(campaignRepository, Mockito.never()).save(any());
     }
 

@@ -42,7 +42,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenFindById_thenTaskRetrieved() {
-        //given
+        // given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(1L);
@@ -72,7 +72,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
-        //given
+        // given
         Task existingTask = new Task("Task 2", "Task 2 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(2L);
@@ -103,12 +103,10 @@ class DefaultTaskServiceUnitTest {
         Task result = taskService.create(inputTask);
 
         // then
-        verify(taskRepository).save(Mockito.argThat(task ->
-          task.getId() == null &&
-          task.getStatus() == TaskStatus.TO_DO &&
-          task.getAssignee() == null &&
-          task.getName().equals("Test Task")
-        ));
+        verify(taskRepository).save(Mockito.argThat(task -> task.getId() == null &&
+            task.getStatus() == TaskStatus.TO_DO &&
+            task.getAssignee() == null &&
+            task.getName().equals("Test Task")));
     }
 
     @Test

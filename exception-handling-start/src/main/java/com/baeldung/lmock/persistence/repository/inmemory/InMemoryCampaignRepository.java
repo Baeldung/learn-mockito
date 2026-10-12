@@ -28,9 +28,9 @@ public class InMemoryCampaignRepository implements CampaignRepository {
     @Override
     public Optional<Campaign> findById(Long id) {
         return campaigns.stream()
-                .filter(p -> p.getId()
-                        .equals(id))
-                .findFirst();
+            .filter(p -> p.getId()
+                .equals(id))
+            .findFirst();
     }
 
     @Override
