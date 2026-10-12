@@ -35,7 +35,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenFindById_thenTaskRetrieved() {
-        //given
+        // given
         Task existingTask = new Task("Task 1", "Task 1 Description", LocalDate.now(), new Campaign("C1-CODE", "Campaign 1", "Campaign 1 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(1L);
@@ -65,7 +65,7 @@ class DefaultTaskServiceUnitTest {
 
     @Test
     void givenExistingTask_whenUpdateStatus_thenUpdatedTaskSaved() {
-        //given
+        // given
         Task existingTask = new Task("Task 2", "Task 2 Description", LocalDate.now(), new Campaign("C2-CODE", "Campaign 2", "Campaign 2 Description"),
             TaskStatus.TO_DO, null);
         existingTask.setId(2L);
@@ -88,7 +88,7 @@ class DefaultTaskServiceUnitTest {
         // given
         Campaign campaign = new Campaign("C3-CODE", "Campaign 3", "Campaign 3 Description");
         Worker worker = new Worker("worker1@test.com", "Worker", "One");
-        Task inProgressTask = new Task("Task 3", "Task 3 Description", LocalDate.now(), campaign , TaskStatus.IN_PROGRESS, worker);
+        Task inProgressTask = new Task("Task 3", "Task 3 Description", LocalDate.now(), campaign, TaskStatus.IN_PROGRESS, worker);
         Long taskId = 1L;
         inProgressTask.setId(taskId);
 

@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,6 +17,8 @@ import com.baeldung.lmock.persistence.repository.CampaignRepository;
 
 class DefaultCampaignServiceUnitTest {
 
+    private AutoCloseable mocks;
+
     @Mock
     private CampaignRepository campaignRepository;
 
@@ -24,7 +27,12 @@ class DefaultCampaignServiceUnitTest {
 
     @BeforeEach
     void setup() {
-        MockitoAnnotations.openMocks(this);
+        mocks = MockitoAnnotations.openMocks(this);
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        mocks.close();
     }
 
     @Test

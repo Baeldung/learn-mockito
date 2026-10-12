@@ -81,8 +81,8 @@ public class DefaultTaskService implements TaskService {
 
     @Override
     public Task completeTask(Long id) {
-         Task task = taskRepository.findById(id).get();
-         task.complete();
-         return taskRepository.save(task);
+        Task task = taskRepository.findById(id).get();
+        task.complete();
+        return taskRepository.save(task);
     }
 }
